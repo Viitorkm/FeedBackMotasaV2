@@ -79,7 +79,7 @@ class FeedbacksController {
         });
       }
 
-      const { NomeAvaliador, Estrelas, Mensagem } = req.body;
+      const { NomeAvaliador, Estrelas, Mensagem, setorId, colaboradorId } = req.body;
 
       // Validação básica
       if (!NomeAvaliador) {
@@ -108,7 +108,9 @@ class FeedbacksController {
       const feedback = await database.connection.models.Feedback.create({
         NomeAvaliador,
         Estrelas,
-        Mensagem: Mensagem || null
+        Mensagem: Mensagem || null,
+        setorId: setorId || null,
+        colaboradorId: colaboradorId || null
       });
 
       return res.status(201).json({
@@ -130,7 +132,7 @@ class FeedbacksController {
   async update(req, res) {
     try {
       const { id } = req.params;
-      const { NomeAvaliador, Estrelas, Mensagem } = req.body;
+      const { NomeAvaliador, Estrelas, Mensagem, setorId, colaboradorId } = req.body;
 
       if (!database.connection.models.Feedback) {
         return res.status(500).json({
@@ -168,6 +170,8 @@ class FeedbacksController {
       if (NomeAvaliador !== undefined) updateData.NomeAvaliador = NomeAvaliador;
       if (Estrelas !== undefined) updateData.Estrelas = Estrelas;
       if (Mensagem !== undefined) updateData.Mensagem = Mensagem;
+      if (setorId !== undefined) updateData.setorId = setorId;
+      if (colaboradorId !== undefined) updateData.colaboradorId = colaboradorId;
 
       await feedback.update(updateData);
 

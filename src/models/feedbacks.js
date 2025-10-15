@@ -37,12 +37,43 @@ export default (sequelize) => {
     Mensagem: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    setorId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      field: 'setor_id',
+      references: {
+        model: 'setores',
+        key: 'id'
+      }
+    },
+    colaboradorId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      field: 'colaborador_id',
+      references: {
+        model: 'colaboradores',
+        key: 'id'
+      }
     }
   }, {
     tableName: 'feedbacks',
     timestamps: true,
     underscored: false
   });
+
+  // Associações
+  Feedback.associate = (models) => {
+    Feedback.belongsTo(models.Setor, {
+      foreignKey: 'setorId',
+      as: 'setor'
+    });
+    
+    Feedback.belongsTo(models.Colaborador, {
+      foreignKey: 'colaboradorId',
+      as: 'colaborador'
+    });
+  };
 
   return Feedback;
 };

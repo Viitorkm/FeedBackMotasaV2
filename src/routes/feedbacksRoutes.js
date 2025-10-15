@@ -1,7 +1,11 @@
 import express from 'express';
 import FeedbacksController from '../controllers/feedbacksController.js';
+import AuthMiddleware from '../middlewares/auth.js';
 
 const router = express.Router();
+
+// Todas as rotas de feedbacks são protegidas
+router.use(AuthMiddleware.authenticate);
 
 // Rotas CRUD para feedbacks
 router.get('/', FeedbacksController.index);           // GET /api/feedbacks - Listar todos

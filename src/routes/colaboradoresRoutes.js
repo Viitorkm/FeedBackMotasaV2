@@ -1,7 +1,11 @@
 import { Router } from 'express';
 import colaboradoresController from '../controllers/colaboradoresController.js';
+import AuthMiddleware from '../middlewares/auth.js';
 
 const router = Router();
+
+// Todas as rotas de colaboradores são protegidas
+router.use(AuthMiddleware.authenticate);
 
 // Rotas para colaboradores
 router.get('/', colaboradoresController.index);           // Listar todos

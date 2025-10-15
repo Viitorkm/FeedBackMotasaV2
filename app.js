@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from "express";
 
 import feedbacksRoutes from "./src/routes/feedbacksRoutes.js";
+import colaboradoresRoutes from "./src/routes/colaboradoresRoutes.js";
 
 import "./src/database/index.js";
 
@@ -29,6 +30,7 @@ class App {
 
   routes() {
     this.server.use('/api/feedbacks', feedbacksRoutes);
+    this.server.use('/api/colaboradores', colaboradoresRoutes);
   }
 }
 

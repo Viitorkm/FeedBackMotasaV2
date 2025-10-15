@@ -1,8 +1,9 @@
 import Sequelize from "sequelize";
 import databaseConfig from "../config/database.cjs";
 import FeedbackModel from "../models/feedbacks.js";
+import ColaboradorModel from "../models/colaboradores.js";
 
-const models = [FeedbackModel];
+const models = [FeedbackModel, ColaboradorModel];
 
 class Database {
   constructor() {
